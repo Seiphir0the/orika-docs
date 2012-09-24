@@ -1,0 +1,13 @@
+---
+layout: post
+title: Configure mappings
+next: conversions.textile
+prev: intro.textile
+---
+
+<div class="page-header">
+  <h1>Configure mappings<small>How to use ClassMapBuilder API to configure mapping.</small></h1>
+</div>
+
+
+This lesson covers:

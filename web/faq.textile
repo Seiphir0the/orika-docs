@@ -1,0 +1,13 @@
+---
+layout: post
+title: FAQ
+next: basics2.textile
+---
+
+This lesson covers:
+
+* "Why mapping?":#why-mapping
+* "Installation":#installation
+* "3rd Party Dependencies":#3rd-dependencies
+* "Setup the mapping factory":#setup-mapping-factory
+* "First example":#first-example

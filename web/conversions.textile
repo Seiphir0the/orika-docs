@@ -1,0 +1,14 @@
+---
+layout: post
+title: Conversions
+next: object-factories.textile
+prev: mappings-via-classmapbuilder.textile
+---
+
+This lesson covers:
+
+* "Why mapping?":#why-mapping
+* "Installation":#installation
+* "3rd Party Dependencies":#3rd-dependencies
+* "Setup the mapping factory":#setup-mapping-factory
+* "First example":#first-example

@@ -1,0 +1,116 @@
+---
+layout: post
+title: Getting started
+next: mappings-via-classmapbuilder.textile
+---
+
+<div class="page-header">
+  <h1>Introduction! <small>Getting started.</small></h1>
+</div>
+
+
+This lesson covers:
+
+* "Why mapping?":#why-mapping
+* "Installation":#installation
+* "3rd Party Dependencies":#3rd-dependencies
+* "Setup the mapping factory":#setup-mapping-factory
+* "First example":#first-example
+
+Reference
+Auto mapping
+Custom Mapper
+Converter
+Mapping fields with different name
+Customize the default field-name mapping
+Nested property
+Collections
+Bi-directional mapping
+Primitives
+Immutable Types
+Enumerations
+Inheritance
+Generic Types
+Object factories
+Proxy Instances
+Debugging Generated Mappers, Converters, etc.
+Pre-requisites
+Edit Source Lookup Path
+Security Exception for Eclipse jar signing
+Generate Source and/or Class Files
+Summary
+This guide is very brief and incomplete. Feel free to fix or improve it
+
+Installation
+For maven users, the easiest way to get going is to add the following dependency to your project.
+
+Please verify the latest version:
+
+<pre class="prettyprint linenums">
+<dependency>
+   <groupId>ma.glasnost.orika</groupId>
+   <artifactId>orika-core</artifactId>
+   <version>1.2.1</version><!-- latest version -->
+</dependency> 
+</pre>
+
+If you do not use maven please download the latest version of the archive zip with dependencies and put it on your classpath.
+
+Once your project is configured you can begin the following tutorial.
+
+h3#(3rd Party Dependencies)
+Orika use javassist to generate byte-code dynamically. If you're downloading and installing the compiled jar in your local m2 repository rather than building from source using maven, you will not get any of the transitive dependencies
+
+Tutorial
+Setup the mapping factory
+The get an instance of MapperFacade? initialise a MapperFactory?:
+
+<pre class="prettyprint linenums">
+MapperFactory factory = new DefaultMapperFactory.Builder().build();
+factory.registerClassMap(factory.classMap(Order.class,OrderDTO.class)
+  .field("product.state.type.label", "stateLabel")
+  .field("product.name", "productName").toClassMap());
+        
+MapperFacade mapper = factory.getMapperFacade();
+</pre>
+
+*Alternative Configuration/Setup Option (since 1.1.2):*
+
+Extend <code>ma.glasnost.orika.impl.ConfigurableMapper</code>, overriding the configure(MapperFactory mapperFactory) method to register any class-maps, converters, etc. Since ConfigurableMapper? implements MapperFacade?, you can then simply construct a new instance (or have one injected) of your extension class and use it as a mapper (your custom configure method will be called during initialization).
+
+<pre class="prettyprint linenums">
+public class MyCustomMapper extends ConfigurableMapper {
+
+   @Override
+   public void configure(MapperFactory mapperFactory) {
+      // register class maps, Mappers, ObjectFactories, and Converters
+      ...
+      mapperFactory.registerClassMap(...)
+      mapperFactory.getConverterFactory().registerConverter(...)
+      ...
+
+   }
+   @Override
+   public void configureFactoryBuilder(DefaultMapperFactory.Builder builder) {
+      // configure properties of the factory, if needed
+   }
+}
+
+public class SomeOtherClass {
+
+   private MapperFacade mapper = new MyCustomMapper();
+ 
+   void someMethod() {
+       
+      mapper.map(blah, Blah.class);
+      ...
+   }
+   ...
+}
+</pre>
+
+This method works particularly well with Spring; just wire up your extension class as a singleton
+
+<pre class="prettyprint linenums">
+   <bean id="mapper" class="org.example.MyCustomMapper" />
+</pre>

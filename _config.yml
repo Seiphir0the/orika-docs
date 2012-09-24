@@ -1,0 +1,48 @@
+source:      web
+destination: ./_site
+google_prettify: true
+
+lessons:
+  - 
+    title: Introduction
+    url: intro.html
+    desc: Getting started, first example
+
+  - 
+    title: Mappings (via api)
+    url: mappings-via-classmapbuilder.html
+    desc: Configure mappers via ClassMapBuilder, class / field mappings
+  
+  -
+    title: Converters
+    url: conversions.html
+    desc: Builtin, global, and field level converter, Bi-directionnal
+    
+  -
+    title: Object factories
+    url: object-factories.html
+    desc: Generated, user provided object factories
+    
+    
+  -
+    title: Unenhance strategies
+    url: unenhance-strategies.html
+    desc: When do you will need to use an unenhance strategy
+    
+  -
+    title: How to extend Orika
+    url: extentions.html
+    desc: Supporting annotation, XML configuration, ...
+    
+  - 
+    title: Tunning Orika!
+    url: tunning.html
+    desc: Tunning Orika to extreme performance
+    
+  -
+    title: Trouble shouting
+    url: trouble-shooting.html
+    desc: How to debug generated code, ...
+    
+   
+   
